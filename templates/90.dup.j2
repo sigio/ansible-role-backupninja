@@ -21,7 +21,7 @@ include = {{path}}
 
 # Global Excludes
 {% for path in backupninja_global_exclude_paths %}
-include = {{path}}
+exclude = {{path}}
 {% endfor %}
 # Local excludes
 {% for path in backupninja_exclude_paths %}
