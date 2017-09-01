@@ -24,6 +24,30 @@ backupninja_keepincroffulls: "no"
 backupninja_bandwidthlimit: ""
 backupninja_sshoptions: ""
 
+# Overrule or append to these for the base configuration
+backupninja_global_include_paths:
+    - "/var/spool/cron/crontabs"
+    - "/var/backups"
+    - "/etc"
+    - "/root"
+    - "/home"
+    - "/usr/local"
+    - "/var/lib/dpkg/status*"
+
+backupninja_global_exclude_paths:
+    - "/home/*/.gnupg"
+    - "/home/*/.local/share/Trash"
+    - "/home/*/.Trash"
+    - "/home/*/.thumbnails"
+    - "/var/cache/backupninja/duplicity"
+    - "/proc"
+    - "/dev"
+    - "/sys"
+
+# Overrule these on your specific hosts or groups
+backupninja_include_paths: []
+backupninja_exclude_paths: []
+
 backupninja_support_mongodb: false
 backupninja_default_jobs:
   - "90.dup"

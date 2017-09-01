@@ -10,24 +10,23 @@ encryptkey =
 password = {{backupninja_encryption_password}}
 
 [source]
-include = /var/spool/cron/crontabs
-include = /var/backups
-include = /etc
-include = /root
-include = /home
-include = /usr/local
-include = /var/lib/dpkg/status*
-include = /local
-include = /config
+# Global Includes
+{% for path in backupninja_global_include_paths %}
+include = {{path}}
+{% endfor %}
+# Local Includes
+{% for path in backupnina_include_paths %}
+include = {{path}}
+{% endfor %}
 
-exclude = /home/*/.gnupg
-exclude = /home/*/.local/share/Trash
-exclude = /home/*/.Trash
-exclude = /home/*/.thumbnails
-exclude = /var/cache/backupninja/duplicity
-exclude = /proc
-exclude = /dev
-exclude = /sys
+# Global Excludes
+{% for path in backupninja_global_exclude_paths %}
+include = {{path}}
+{% endfor %}
+# Local excludes
+{% for path in backupnina_exclude_paths %}
+exclude = {{path}}
+{% endfor %}
 
 [dest]
 incremental = {{backupninja_incremental}}
