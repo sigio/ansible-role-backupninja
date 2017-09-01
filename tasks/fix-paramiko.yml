@@ -1,0 +1,5 @@
+---
+
+- name: Copy replacement paramiko transport to fix paramiko bug (temporary)
+  copy: src=transport.py dest=/usr/lib/python2.7/dist-packages/paramiko/transport.py owner=root group=root mode=0644
+  tags: paramiko

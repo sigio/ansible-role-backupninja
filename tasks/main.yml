@@ -1,0 +1,57 @@
+---
+
+- name: Install backupninja packages
+  apt: name="{{item}}" state=installed
+  with_items:
+    - dialog
+    - backupninja
+    - duplicity
+    - python-paramiko
+
+- name: Create reports directory
+  file: state=directory path="{{item}}" owner=root group={{backupninja_admingroup}} mode=0700
+  with_items:
+    - "{{backupninja_configdir}}"
+    - "{{backupninja_reportdir}}"
+  tags:
+    - backupninja
+
+- name: Copy additional backupninja plugins
+  copy: src="{{item}}" dest="/usr/share/backupninja/{{item}}" owner=root group=root mode=0644
+  with_items:
+    - mongodb
+    - mongodb.helper
+  when: backupninja_support_mongodb|bool
+
+- name: Template backup.d files
+  template: src="{{item}}.j2" dest="/etc/backup.d/{{item}}" owner=root group=root mode=0600
+  with_items:
+    - "{{backup_templates|default([])}}"
+    - "{{backupninja_default_jobs|default([]}}"
+  tags:
+    - backupninja
+    - backuptasks
+
+- name: Template backupninja.conf
+  template: src="backupninja.conf.j2" dest="/etc/backupninja.conf" owner=root group=root mode=0600
+  tags:
+    - backupninja
+    - backupninja.conf
+
+- name: Configure backup-host in ssh config for root
+  blockinfile:
+    path: "/root/.ssh/config"
+    owner: "root"
+    group: "root"
+    mode: "0600"
+    create: "yes"
+    block: |
+      host backup
+        HostName {{backup_domain}}
+        User {{backup_name}}
+  tags:
+    - ssh-config
+
+- include: fix-paramiko.yml
+  tags: paramiko
+  when: backupninja_hotpatch_paramiko|bool

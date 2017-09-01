@@ -1,0 +1,78 @@
+# {{ ansible_managed }}
+
+#
+#                          |\_
+# B A C K U P N I N J A   /()/
+#                         `\|
+# main configuration file
+#
+
+# how verbose to make the logs
+# 5 -- Debugging messages     (and below)
+# 4 -- Informational messages (and below)
+# 3 -- Warnings               (and below)
+# 2 -- Errors                 (and below)
+# 1 -- Fatal errors           (only)
+loglevel = 4
+
+# send a summary of the backup status to
+# this email address:
+reportemail = {{backupninja_reportemail}}
+
+# if set to 'yes', a report email will be generated
+# even if all modules reported success. (default = yes)
+reportsuccess = {{backupninja_reportsuccess}}
+
+# if set to 'yes', info messages from handlers will be 
+# sent into the email (default = no)
+reportinfo = {{backupninja_reportinfo}}
+
+# if set to 'yes', a report email will be generated
+# even if there was no error. (default = yes)
+reportwarning = {{backupninja_reportwarning}}
+
+# if set to 'yes', disk space usage will be included in
+# the backup email report
+reportspace = {{backupninja_reportspace}}
+
+# where to rsync the backupninja.log to be aggregated in
+# a ninjareport
+reporthost = {{backupninja_reporthost}}
+
+# what user to connect to reporthost to sync the
+# backupninja.log
+reportuser = {{backupninja_reportuser}}
+
+# where on the reporthost should the report go
+# NOTE: the name of the log will be used in the report, 
+# use a globally unique name, preferably the hostname
+reportdirectory = {{backupninja_reportdir}}
+
+# set to the administration group that is allowed to 
+# read/write configuration files in /etc/backup.d
+admingroup = {{backupninja_admingroup}}
+
+#######################################################
+# for most installations, the defaults below are good #
+#######################################################
+
+# where to log:
+logfile = {{backupninja_logfile}}
+
+# directory where all the backup configuration files live
+configdirectory = {{backupninja_configdir}}
+
+# where backupninja helper scripts are found
+scriptdirectory = {{backupninja_scriptdir}}
+
+# where backupninja libs are found
+libdirectory = {{backupninja_libdir}}
+
+# whether to use colors in the log file
+usecolors = {{backupninja_usecolors}}
+
+# default value for 'when'
+when = {{backupninja_when}}
+
+# if running vservers, set to yes
+vservers = {{backupninja_vservers}}

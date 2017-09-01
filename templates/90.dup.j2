@@ -1,0 +1,40 @@
+# {{ ansible_managed }}
+
+options = 
+nicelevel = 19
+testconnect = no
+
+[gpg]
+sign = no
+encryptkey = 
+password = {{backupninja_encryption_password}}
+
+[source]
+include = /var/spool/cron/crontabs
+include = /var/backups
+include = /etc
+include = /root
+include = /home
+include = /usr/local
+include = /var/lib/dpkg/status*
+include = /local
+include = /config
+
+exclude = /home/*/.gnupg
+exclude = /home/*/.local/share/Trash
+exclude = /home/*/.Trash
+exclude = /home/*/.thumbnails
+exclude = /var/cache/backupninja/duplicity
+exclude = /proc
+exclude = /dev
+exclude = /sys
+
+[dest]
+incremental = {{backupninja_incremental}}
+increments = {{backupninja_increments}}
+keep = {{backupninja_keep}}
+keepincroffulls = {{backupninja_keepincroffulls}}
+bandwidthlimit = {{backupninja_bandwidthlimit}}
+sshoptions = {{backupninja_sshoptions}}
+desturl = sftp://{{backup_name}}@{{backup_domain}}/{{backup_root}}/{{ansible_hostname}}/
+

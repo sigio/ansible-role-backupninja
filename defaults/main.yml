@@ -1,0 +1,33 @@
+---
+
+backupninja_encryption_password: "REPLACE_ME_WITH_A_STRONG_PASSWORD"
+backupninja_reportemail: "root"
+backupninja_reportsuccess: "yes"
+backupninja_reportinfo: "yes"
+backupninja_reportwarning: "yes"
+backupninja_reportspace: "yes"
+backupninja_reporthost: ""
+backupninja_reportuser: "ninja"
+backupninja_reportdir: "/var/lib/backupninja/reports"
+backupninja_admingroup: "adm"
+backupninja_logfile: "/var/log/backupninja.{{ansible_hostname}}.log"
+backupninja_configdir: "/etc/backup.d"
+backupninja_scriptdir: "/usr/share/backupninja"
+backupninja_libdir: "/usr/lib/backupninja"
+backupninja_usecolors: "yes"
+backupninja_when: "everyday at 02:00"
+backupninja_vservers: "no"
+backupninja_increments: 30
+backupninja_keep: 60
+backupninja_incremental: "yes"
+backupninja_keepincroffulls: "no"
+backupninja_bandwidthlimit: ""
+backupninja_sshoptions: ""
+
+backupninja_support_mongodb: false
+backupninja_default_jobs:
+  - "90.dup"
+  - "99-report.sh"
+
+# Replace paramiko with a version that doesn't print a deprecation warning
+backupninja_hotpatch_paramiko: false
