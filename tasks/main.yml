@@ -27,7 +27,7 @@
   template: src="{{item}}.j2" dest="/etc/backup.d/{{item}}" owner=root group=root mode=0600
   with_items:
     - "{{backup_templates|default([])}}"
-    - "{{backupninja_default_jobs|default([]}}"
+    - "{{backupninja_default_jobs|default([])}}"
   tags:
     - backupninja
     - backuptasks
