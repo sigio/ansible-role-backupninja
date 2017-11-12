@@ -52,6 +52,6 @@
   tags:
     - ssh-config
 
-- include: fix-paramiko.yml
+- include_tasks: fix-paramiko.yml
   tags: paramiko
   when: backupninja_hotpatch_paramiko|bool
