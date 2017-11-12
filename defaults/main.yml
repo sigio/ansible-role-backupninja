@@ -23,6 +23,7 @@ backupninja_incremental: "yes"
 backupninja_keepincroffulls: "no"
 backupninja_bandwidthlimit: ""
 backupninja_sshoptions: ""
+backupninja_duplicity_options: "--volsize=1000"
 
 # Overrule or append to these for the base configuration
 backupninja_global_include_paths:
