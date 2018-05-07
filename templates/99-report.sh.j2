@@ -6,11 +6,11 @@ IGNORE="$(basename $0)"
 LOGFILE="{{backupninja_logfile}}"
 CHECKNAME="backup"
 
-NSCA=/usr/sbin/send_nsca
-NSCACONF=/etc/nagios/send_nsca.cfg
+NSCA="{{send_nsca|default('/usr/sbin/send_nsca')}}"
+NSCACONF={{send_nsca_config|default('/etc/nagios/send_nsca.cfg')}}
 NSCASERVER={{nsca_server}}
 NSCAPORT={{nsca_port|default('5667')}}
-HOSTNAME=`hostname`.{{dns_domain}}
+HOSTNAME={{inventory_hostname|default('undefined')}}
 
 if [ -r /root/scripts/monitor.rc ]; then
 	source /root/scripts/monitor.rc

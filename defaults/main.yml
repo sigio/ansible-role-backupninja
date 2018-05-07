@@ -20,7 +20,7 @@ backupninja_vservers: "no"
 backupninja_increments: 30
 backupninja_keep: 60
 backupninja_incremental: "yes"
-backupninja_keepincroffulls: "no"
+backupninja_keepincroffulls: "2"
 backupninja_bandwidthlimit: ""
 backupninja_sshoptions: ""
 backupninja_duplicity_options: "--volsize=1000"

@@ -2,8 +2,10 @@
 
 CONTAINER=`docker ps | grep "gitlab/gitlab-ce:latest" | awk '{print $1}'`
 
+{% raw %}
 # Find location for backups
 BACKUPPATH=`docker inspect --format '{{ range .Mounts }}{{ if eq .Destination "/var/opt/gitlab" }}{{ .Source }}{{ end }}{{ end }}/backups' ${CONTAINER}`
+{% endraw %}
 
 echo "Cleaning: $BACKUPPATH"
 for file in $BACKUPPATH/*.tar

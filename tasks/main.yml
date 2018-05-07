@@ -49,6 +49,7 @@
       host backup
         HostName {{backup_domain}}
         User {{backup_name}}
+        AddressFamily inet
   tags:
     - ssh-config
 
