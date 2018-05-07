@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CONTAINER=`docker ps | grep "gitlab/gitlab-ce:latest" | awk '{print $1}'`
+
+# Find location for backups
+BACKUPPATH=`docker inspect --format '{{ range .Mounts }}{{ if eq .Destination "/var/opt/gitlab" }}{{ .Source }}{{ end }}{{ end }}/backups' ${CONTAINER}`
+
+echo "Cleaning: $BACKUPPATH"
+for file in $BACKUPPATH/*.tar
+do
+        rm -v $file
+done
+
+echo "Trigginging gitlab-backup run"
+time docker exec -it ${CONTAINER} gitlab-rake gitlab:backup:create SKIP=registry
+echo "Done with gitlab-backup"
