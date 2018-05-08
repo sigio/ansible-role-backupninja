@@ -2,9 +2,9 @@
 
 hotcopy = no
 sqldump = yes
-compress = yes
+compress = {{backupninja_mysql_compress}}
 dbhost = localhost
-backupdir = /local/backups/
-databases = all
-configfile = /etc/mysql/debian.cnf
+backupdir = {{backupninja_mysql_backupdir}}
+databases = {{backupninja_mysql_databases|default('all')}}
+configfile = {{backupninja_mysql_configfile}}
 sqldumpoptions = --single-transaction --complete-insert --add-drop-table --quick --quote-names

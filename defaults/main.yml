@@ -25,6 +25,12 @@ backupninja_bandwidthlimit: ""
 backupninja_sshoptions: ""
 backupninja_duplicity_options: "--volsize=1000"
 
+# MySQL Backups (space seperated DB names)
+backupninja_mysql_databases:    "all"
+backupninja_mysql_backupdir:    "/var/backups/mysql"
+backupninja_mysql_compress:     "yes"
+backupninja_mysql_configfile:   "/etc/mysql/debian.cnf"
+
 # Overrule or append to these for the base configuration
 backupninja_global_include_paths:
     - "/var/spool/cron/crontabs"
