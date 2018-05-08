@@ -1,0 +1,14 @@
+### backupninja PostgreSQL config file ###
+# {{ ansible_managed }}
+
+# backupdir = <dir> (default: /var/backups/postgres)
+# where to dump the backups
+backupdir = {{backupninja_pgsql_backupdir}}
+
+# databases = < all | db1 db2 db3 > (default = all)
+databases = {{backupninja_pgsql_databases}}
+
+compress = {{backupninja_pgsql_compress}}
+
+# format = < plain | tar | custom > (default = plain)
+format = {{backupninja_pgsql_format}}

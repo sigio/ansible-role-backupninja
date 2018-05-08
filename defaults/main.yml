@@ -31,6 +31,12 @@ backupninja_mysql_backupdir:    "/var/backups/mysql"
 backupninja_mysql_compress:     "yes"
 backupninja_mysql_configfile:   "/etc/mysql/debian.cnf"
 
+# Postgres backup options
+backupninja_pgsql_backupdir:    "/var/backups/postgres"
+backupninja_pgsql_databases:    "all"
+backupninja_pgsql_compress:     "yes"
+backupninja_pgsql_format:       "plain"
+
 # Overrule or append to these for the base configuration
 backupninja_global_include_paths:
     - "/var/spool/cron/crontabs"
