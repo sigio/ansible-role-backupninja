@@ -21,13 +21,17 @@
   with_items:
     - mongodb
     - mongodb.helper
-  when: backupninja_support_mongodb|bool
+  when:
+    - backupninja_support_mongodb|bool
+    - enable_backups|bool
 
 - name: Template backup.d files
   template: src="{{item}}.j2" dest="/etc/backup.d/{{item}}" owner=root group=root mode=0600
   with_items:
     - "{{backup_templates|default([])}}"
     - "{{backupninja_default_jobs|default([])}}"
+  when:
+    - enable_backups|bool
   tags:
     - backupninja
     - backuptasks
@@ -50,6 +54,8 @@
         HostName {{backup_domain}}
         User {{backup_name}}
         AddressFamily inet
+  when:
+    - enable_backups|bool
   tags:
     - ssh-config
 

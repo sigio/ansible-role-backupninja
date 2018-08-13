@@ -68,3 +68,5 @@ backupninja_default_jobs:
 
 # Replace paramiko with a version that doesn't print a deprecation warning
 backupninja_hotpatch_paramiko: false
+
+enable_backups: true
