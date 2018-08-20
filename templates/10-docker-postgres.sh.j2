@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Finding postgres databases in container '{{backupninja_docker_postgres_containername}}'"
+
+/usr/bin/docker exec -it {{backupninja_docker_postgres_containername}} /bin/bash -c "/usr/bin/psql -AtU postgres -c 'SELECT datname from pg_database WHERE NOT datistemplate'" | dos2unix | tee /var/run/postgres-db-list
+
+for DBNAME in `cat /var/run/postgres-db-list`
+do
+    echo "Creating backup for '${DBNAME}'"
+    /usr/bin/docker exec -it {{backupninja_docker_postgres_containername}} /usr/bin/pg_dump -Upostgres --format=c --file="/var/lib/postgresql/data/_backups/${DBNAME}.sqlc" "${DBNAME}"
+done;
+
