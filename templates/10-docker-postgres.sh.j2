@@ -2,11 +2,21 @@
 
 echo "Finding postgres databases in container '{{backupninja_docker_postgres_containername}}'"
 
-/usr/bin/docker exec -it {{backupninja_docker_postgres_containername}} /bin/bash -c "/usr/bin/psql -AtU postgres -c 'SELECT datname from pg_database WHERE NOT datistemplate'" | dos2unix | tee /var/run/postgres-db-list
+/usr/bin/docker exec {{backupninja_docker_postgres_containername}} /bin/bash -c "/usr/bin/psql -AtU postgres -c 'SELECT datname from pg_database WHERE NOT datistemplate'" | tee /var/run/postgres-db-list
 
-for DBNAME in `cat /var/run/postgres-db-list`
-do
-    echo "Creating backup for '${DBNAME}'"
-    /usr/bin/docker exec -it {{backupninja_docker_postgres_containername}} /usr/bin/pg_dump -Upostgres --format=c --file="/var/lib/postgresql/data/_backups/${DBNAME}.sqlc" "${DBNAME}"
-done;
+echo "List of databases:"
+cat /var/run/postgres-db-list
+
+if [ -s /var/run/postgres-db-list ];
+then
+    for DBNAME in `cat /var/run/postgres-db-list`
+    do
+        echo "Creating backup for '${DBNAME}'"
+        /usr/bin/docker exec {{backupninja_docker_postgres_containername}} /usr/bin/pg_dump -Upostgres --format=c --file="/var/lib/postgresql/data/_backups/${DBNAME}.sqlc" "${DBNAME}"
+    done;
+else
+    echo "No databases to backup ????"
+    exit 2;
+fi
+
 
