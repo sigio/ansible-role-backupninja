@@ -46,6 +46,7 @@ backupninja_global_include_paths:
     - "/home"
     - "/usr/local"
     - "/var/lib/dpkg/status*"
+    - "/opt"
 
 backupninja_global_exclude_paths:
     - "/home/*/.gnupg"
