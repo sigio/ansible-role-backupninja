@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+
+[source]
+type = local
+keep = {{backupninja_keep}}
+
+# Global Includes
+{% for path in backupninja_global_include_paths %}
+include = {{path}}
+{% endfor %}
+# Local Includes
+{% for path in backupninja_include_paths %}
+include = {{path}}
+{% endfor %}
+
+# Global Excludes
+{% for path in backupninja_global_exclude_paths %}
+exclude = {{path}}
+{% endfor %}
+# Local excludes
+{% for path in backupninja_exclude_paths %}
+exclude = {{path}}
+{% endfor %}
+
+[dest]
+type = remote
+directory = {{backupninja_rdiff_directory }}
+host = {{backupninja_rdiff_host }}
+user = {{backupninja_rdiff_user }}

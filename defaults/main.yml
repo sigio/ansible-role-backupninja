@@ -57,6 +57,10 @@ backupninja_global_exclude_paths:
     - "/proc"
     - "/dev"
     - "/sys"
+    - "/lost+found"
+    - "/tmp"
+    - "/media"
+    - "/mnt"
 
 # Overrule these on your specific hosts or groups
 backupninja_include_paths: []
