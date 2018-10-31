@@ -7,6 +7,16 @@
     - backupninja
     - duplicity
     - python-paramiko
+  when: ansible_os_family == "Debian"
+
+- name: Install backupninja packages
+  yum: name="{{item}}" state=present
+  with_items:
+    - dialog
+    - backupninja
+    - duplicity
+    - python-paramiko
+  when: ansible_os_family == "RedHat"
 
 - name: Create reports directory
   file: state=directory path="{{item}}" owner=root group={{backupninja_admingroup}} mode=0700
