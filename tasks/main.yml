@@ -72,3 +72,5 @@
 - include_tasks: fix-paramiko.yml
   tags: paramiko
   when: backupninja_hotpatch_paramiko|bool
+
+- import_tasks: "../../../common_tasks/update_localfacts.yml"
